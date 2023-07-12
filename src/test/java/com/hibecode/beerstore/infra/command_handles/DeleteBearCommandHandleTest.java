@@ -21,6 +21,8 @@ import static org.mockito.Mockito.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DeleteBearCommandHandleTest {
     DeleteBearCommandHandle handle;
+    Beer beer;
+
     @Mock
     private BeerRepository repository;
 
@@ -29,10 +31,16 @@ public class DeleteBearCommandHandleTest {
     {
         MockitoAnnotations.openMocks(this);
         handle = new DeleteBearCommandHandle(repository);
+
+        beer = new Beer();
+        beer.setId(1l);
+        beer.setName("Heineken");
+        beer.setType(BeerType.LARGER);
+        beer.setVolume(new BigDecimal(355));
     }
 
     @Test
-    public void should_retorn_error_if_beer_not_exist()
+    public void should_return_error_if_beer_not_exist()
     {
         when(repository.findById(any())).thenReturn(Optional.empty());
         assertThrowsExactly(BusinessException.class, ()-> handle.handle(1l));
@@ -40,12 +48,6 @@ public class DeleteBearCommandHandleTest {
 
     @Test
     public void should_delete_beer() throws BusinessException {
-        final var beer = new Beer();
-
-        beer.setName("Heineken");
-        beer.setType(BeerType.LARGER);
-        beer.setVolume(new BigDecimal(355));
-
         when(repository.findById(anyLong())).thenReturn(Optional.of(beer));
 
         handle.handle(anyLong());

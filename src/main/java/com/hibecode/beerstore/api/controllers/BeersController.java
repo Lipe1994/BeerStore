@@ -1,10 +1,11 @@
 package com.hibecode.beerstore.api.controllers;
 
 import com.hibecode.beerstore.core.entities.Beer;
-import com.hibecode.beerstore.core.exceptions.BusinessException;
 import com.hibecode.beerstore.infra.command_handles.CreateBearCommandHandle;
 import com.hibecode.beerstore.infra.command_handles.DeleteBearCommandHandle;
 import com.hibecode.beerstore.infra.command_handles.UpdateBearCommandHandle;
+import com.hibecode.beerstore.infra.command_handles.commands.CreateBeerCommand;
+import com.hibecode.beerstore.infra.command_handles.commands.UpdateBeerCommand;
 import com.hibecode.beerstore.infra.repositories.BeerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,11 +21,11 @@ public class BeersController {
     @Autowired
     private BeerRepository repository;
     @Autowired
-    CreateBearCommandHandle createBearCommandhandle;
+    private CreateBearCommandHandle createBearCommandhandle;
     @Autowired
-    UpdateBearCommandHandle updateBearCommandhandle;
+    private UpdateBearCommandHandle updateBearCommandhandle;
     @Autowired
-    DeleteBearCommandHandle deleteBearCommandhandle;
+    private DeleteBearCommandHandle deleteBearCommandhandle;
 
     @GetMapping
     public List<Beer> beers()
@@ -34,20 +35,16 @@ public class BeersController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Long beer(@RequestBody @Valid  Beer beer)
+    public Long beer(@RequestBody @Valid CreateBeerCommand command)
     {
-        return createBearCommandhandle.handle(beer);
+        return createBearCommandhandle.handle(command);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Long beer(@PathVariable Long id, @RequestBody @Valid  Beer beer)
+    public Long beer(@PathVariable Long id, @RequestBody @Valid UpdateBeerCommand command)
     {
-        if (id != beer.getId()) {
-            throw new BusinessException("Id of resource is inconsistent from body of request");
-        }
-
-        return updateBearCommandhandle.handle(beer);
+        return updateBearCommandhandle.handle(id, command);
     }
 
     @DeleteMapping("/{id}")
