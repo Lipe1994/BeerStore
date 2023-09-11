@@ -10,9 +10,6 @@ import java.math.BigDecimal;
 
 @Data
 public class CreateBeerCommand {
-        @NotNull(message = "beers-0")
-        private Long id;
-
         @NotNull
         @NotBlank(message = "beers-1")
         private String name;

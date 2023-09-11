@@ -24,9 +24,9 @@ public class CreateBearCommandHandle {
         }
 
         final var beer = new Beer();
-        beer.setId(command.getId());
         beer.setName(command.getName());
         beer.setType(command.getType());
+        beer.setVolume(command.getVolume());
 
         return repository.save(beer).getId();
     }
