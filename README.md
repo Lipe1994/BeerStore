@@ -5,3 +5,5 @@ Acompanhando curso absorvi a implementação utilizada e a adaptei arquiteturalm
 
 Também por meio do treinamento pude conhecer e configurar o terraform no cloud da aws, e pretendo criar as mesmas configuracoes na nuvem da azure também como exercicio de fixacao dos conceitos aprendidos
 
+## Extra
+  -  Aplicativo cliente desenvolvido em Swift que consome essa API [iBeerStore](https://github.com/Lipe1994/iBeerstore)   
