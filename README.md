@@ -5,7 +5,7 @@ Acompanhando curso absorvi a implementação utilizada e a adaptei arquiteturalm
 
 Também por meio do treinamento pude conhecer e configurar o terraform no cloud da aws, e pretendo criar as mesmas configurações na nuvem da azure como exercício de fixação dos conceitos aprendidos.
 
-Para executar é necessário configurar um banco de dados em "/src/main/resources/application.properties"
+Para executar é necessário configurar um banco de dados PostgreSQL em "/src/main/resources/application.properties"
 
 ## Extra
   -  Aplicativo cliente desenvolvido em Swift que consome essa API [iBeerStore](https://github.com/Lipe1994/iBeerstore)   
